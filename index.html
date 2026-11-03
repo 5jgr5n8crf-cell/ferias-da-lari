@@ -1,0 +1,219 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Férias da Lari! ☀️</title>
+
+<style>
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 25px;
+  font-family: 'Trebuchet MS', Arial, sans-serif;
+  background: linear-gradient(135deg, #fff4d6, #ffe2e8, #dff6ef);
+  color: #59445c;
+  overflow: hidden;
+}
+
+.container {
+  width: 100%;
+  max-width: 650px;
+  background: rgba(255,255,255,0.85);
+  border-radius: 30px;
+  padding: 45px 25px;
+  text-align: center;
+  box-shadow: 0 15px 45px rgba(120,80,100,0.12);
+  border: 3px solid white;
+}
+
+.decor {
+  font-size: 35px;
+  margin-bottom: 15px;
+  letter-spacing: 12px;
+}
+
+h1 {
+  font-size: clamp(38px, 8vw, 60px);
+  color: #ec7893;
+  margin-bottom: 15px;
+}
+
+.subtitle {
+  font-size: 18px;
+  margin-bottom: 30px;
+  color: #806a83;
+}
+
+.timer {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+}
+
+.time-box {
+  background: #fff0f3;
+  border-radius: 18px;
+  padding: 22px 5px;
+  border: 2px solid #ffdae3;
+}
+
+.time-box:nth-child(even) {
+  background: #edf9f2;
+  border-color: #d5eee0;
+}
+
+.number {
+  font-size: clamp(27px, 7vw, 43px);
+  font-weight: bold;
+  color: #e77996;
+  font-variant-numeric: tabular-nums;
+}
+
+.label {
+  font-size: 12px;
+  margin-top: 8px;
+  font-weight: bold;
+  letter-spacing: 1px;
+  color: #806a83;
+}
+
+.date {
+  margin-top: 30px;
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.message {
+  margin-top: 25px;
+  font-size: 19px;
+  color: #68a78c;
+  font-weight: bold;
+}
+
+.footer {
+  margin-top: 35px;
+  font-size: 14px;
+  color: #a18ca1;
+}
+
+@media (max-width: 420px) {
+  .container {
+    padding: 35px 15px;
+  }
+
+  .timer {
+    gap: 7px;
+  }
+
+  .time-box {
+    padding: 18px 2px;
+  }
+
+  .label {
+    font-size: 10px;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+  <div class="decor">🌴 ☀️ 🍹</div>
+
+  <h1>Férias da Lari!</h1>
+
+  <p class="subtitle">
+    A liberdade está chegando... prepare as malas! 🧳
+  </p>
+
+  <div class="timer">
+
+    <div class="time-box">
+      <div class="number" id="days">00</div>
+      <div class="label">DIAS</div>
+    </div>
+
+    <div class="time-box">
+      <div class="number" id="hours">00</div>
+      <div class="label">HORAS</div>
+    </div>
+
+    <div class="time-box">
+      <div class="number" id="minutes">00</div>
+      <div class="label">MINUTOS</div>
+    </div>
+
+    <div class="time-box">
+      <div class="number" id="seconds">00</div>
+      <div class="label">SEGUNDOS</div>
+    </div>
+
+  </div>
+
+  <p class="date">📅 10 DE NOVEMBRO DE 2026</p>
+
+  <p class="message" id="message">
+    Cada segundo mais perto do descanso! 💖
+  </p>
+
+  <div class="footer">
+    Menos trabalho, mais sol e diversão! 🏖️
+  </div>
+
+</div>
+
+<script>
+const targetDate = new Date("2026-11-10T00:00:00-03:00").getTime();
+
+function updateCountdown() {
+  const now = Date.now();
+  const difference = targetDate - now;
+
+  if (difference <= 0) {
+    document.getElementById("days").textContent = "00";
+    document.getElementById("hours").textContent = "00";
+    document.getElementById("minutes").textContent = "00";
+    document.getElementById("seconds").textContent = "00";
+
+    document.getElementById("message").textContent =
+      "CHEGOU O GRANDE DIA! BOAS FÉRIAS, LARI! 🎉";
+
+    return;
+  }
+
+  const days = Math.floor(difference / (1000 * 60 * 60 * 24));
+  const hours = Math.floor((difference / (1000 * 60 * 60)) % 24);
+  const minutes = Math.floor((difference / (1000 * 60)) % 60);
+  const seconds = Math.floor((difference / 1000) % 60);
+
+  document.getElementById("days").textContent =
+    String(days).padStart(2, "0");
+
+  document.getElementById("hours").textContent =
+    String(hours).padStart(2, "0");
+
+  document.getElementById("minutes").textContent =
+    String(minutes).padStart(2, "0");
+
+  document.getElementById("seconds").textContent =
+    String(seconds).padStart(2, "0");
+}
+
+updateCountdown();
+setInterval(updateCountdown, 1000);
+</script>
+
+</body>
+</html>
